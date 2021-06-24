@@ -2,6 +2,7 @@ const gulp = require('gulp')
 const clean = require('gulp-clean')
 const sass = require('gulp-sass')
 const cleanCss = require('gulp-clean-css')
+const autoprefixer = require('gulp-autoprefixer')
 const sourcemaps = require('gulp-sourcemaps')
 
 const browserSync = require('browser-sync').create()
@@ -19,10 +20,13 @@ gulp.task('html', function() {
 gulp.task('sass', function() {
 	return gulp.src('src/css/index.scss')
 		.pipe(sourcemaps.init())
+		.pipe(autoprefixer())
 		.pipe(sass())
+
 		.pipe(
 			cleanCss()
 		)
+
 		.pipe(sourcemaps.write())
 		.pipe(gulp.dest('dist'))
 		.pipe(browserSync.stream())
@@ -34,7 +38,18 @@ gulp.task('js', function() {
 			mode: 'development',
 			output: {
 				filename: 'index.js'
-			}
+			},
+			module: {
+				rules: [
+					{
+						test: /\.(glsl|vs|fs|vert|frag|txt)$/,
+						exclude: /node_moduels/,
+						use: [
+							'raw-loader',
+						]
+					},
+				],
+			},
 		}))
 		.pipe(gulp.dest('dist'))
 		.pipe(browserSync.stream())

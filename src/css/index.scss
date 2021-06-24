@@ -1,5 +1,11 @@
 @import 'color';
 
 body {
-	background: $red;
+	animation: 2s alfa;
+}
+
+@keyframes alfa {
+	to {
+		opacity: 0.5;
+	}
 }
