@@ -10,10 +10,13 @@ const webpack = require('webpack-stream')
 
 const imagemin = require('gulp-imagemin')
 
+const htmlmin = require('gulp-htmlmin')
+
 sass.compiler = require('node-sass')
 
 gulp.task('html', function() {
 	return gulp.src('src/*.html')
+		.pipe(htmlmin({ collapseWhitespace: true }))
 		.pipe(gulp.dest('dist'))
 })
 
@@ -69,6 +72,7 @@ gulp.task('images', function() {
 
 gulp.task('watch', function() {
 	browserSync.init({
+		notify: false,
 		server: {
 			baseDir: 'dist'
 		}
