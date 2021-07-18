@@ -47,11 +47,9 @@ gulp.task('sass', function() {
     .pipe(sassGlob())
     .pipe(autoprefixer())
     .pipe(sass())
-
     .pipe(
       cleanCss()
     )
-
     .pipe(sourcemaps.write())
     .pipe(gulp.dest('dist'))
     .pipe(browserSync.stream())
@@ -64,6 +62,7 @@ gulp.task('js', function() {
       output: {
         filename: 'index.js'
       },
+      devtool: 'inline-source-map',
       module: {
         rules: [
           {
@@ -118,4 +117,4 @@ gulp.task('watch', function() {
   gulp.watch('src/img/*', gulp.series('images'))
 })
 
-gulp.task('default', gulp.series('twig', 'sass', 'js', 'fonts', 'images', 'watch'))
+gulp.task('default', gulp.series('twig', gulp.parallel('sass', 'js', 'fonts', 'images'), 'watch'))
