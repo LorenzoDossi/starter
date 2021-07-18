@@ -7,17 +7,17 @@
   <link rel="stylesheet" href="index.css">
   <title>My website</title>
 </head>
-<body>
+<body data-barba="wrapper">
 
-  {% include "../components/header.twig" %}
+  <div data-scroll-container>
+    {% include "../components/header.twig" %}
 
-  <main>
-    {% block content %}
+      <main data-barba="container">
+        {% block content %}{% endblock %}
+      </main>
 
-    {% endblock %}
-  </main>
-
-  {% include "../components/footer.twig" %}
+    {% include "../components/footer.twig" %}
+  </div>
 
   <script src="index.js"></script>
 </body>

@@ -1,5 +1,5 @@
-<header class="SiteHeader">
-  <ul>
+<header class="SiteHeader" data-scroll-section>
+  <ul class="container-fluid">
     {% for item in menu.items %}
       <li><a href="{{ item.url }}">{{ item.label }}</a></li>
     {% endfor %}
